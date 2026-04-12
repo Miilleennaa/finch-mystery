@@ -1,0 +1,637 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #0a0c12;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: #ece8df;
+    overflow-x: hidden;
+    min-height: 100vh;
+    font-size: 20px;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #1e1b16;
+}
+::-webkit-scrollbar-thumb {
+    background: #9b7b4c;
+    border-radius: 4px;
+}
+
+.bg-dark {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a2a1f 0%, #0a0f0a 50%, #0a0c12 100%);
+    z-index: -2;
+}
+
+.overlay-mist {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 40%, rgba(180, 140, 72, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.header {
+    text-align: center;
+    border-bottom: 2px solid #9b7b4c;
+    margin-bottom: 2rem;
+    padding-bottom: 1.2rem;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #d4bc7a;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.header p {
+    font-style: italic;
+    color: #b8aa8a;
+    margin-top: 0.5rem;
+}
+
+.header-decoration {
+    width: 100px;
+    height: 2px;
+    background: #9b7b4c;
+    margin: 1rem auto 0;
+}
+
+.case-intro {
+    background: rgba(20, 18, 14, 0.7);
+    border: 1px solid #4a3a28;
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(3px);
+}
+
+.case-badge {
+    display: inline-block;
+    background: #2a241c;
+    color: #d4bc7a;
+    padding: 0.3rem 1rem;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    border: 1px solid #9b7b4c;
+}
+
+.case-intro p {
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+}
+
+.case-intro strong {
+    color: #d4bc7a;
+}
+
+.progress-tracker {
+    margin-top: 1.2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #4a3a28;
+}
+
+.progress-bar {
+    background: #2a241c;
+    height: 10px;
+    border-radius: 10px;
+    margin-top: 0.5rem;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #9b7b4c, #d4bc7a);
+    transition: width 0.3s ease;
+    border-radius: 10px;
+}
+
+h2 {
+    font-size: 1.6rem;
+    border-left: 4px solid #9b7b4c;
+    padding-left: 1rem;
+    margin: 2rem 0 1rem 0;
+    color: #d4bc7a;
+}
+
+.map-section {
+    margin-bottom: 2rem;
+}
+
+.map-instruction {
+    color: #b8aa8a;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.interactive-map {
+    background: #0f0d0a;
+    border-radius: 24px;
+    padding: 1rem;
+    border: 1px solid #4a3a28;
+}
+
+.map-container {
+    display: flex;
+    justify-content: center;
+    background: #1a382a;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.uk-map {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+
+.map-region {
+    stroke: #d4bc7a;
+    stroke-width: 2.5;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.3));
+}
+
+.map-region:hover {
+    stroke: #ffd966;
+    stroke-width: 3.5;
+    filter: drop-shadow(0 0 8px rgba(212, 188, 122, 0.5));
+}
+
+.map-region.england { fill: #4d6a3a; }
+.map-region.scotland { fill: #4a5a6a; }
+.map-region.wales { fill: #6a4a3a; }
+.map-region.northernireland { fill: #3a5a5a; }
+
+.map-region.solved {
+    stroke: #ffaa44;
+    stroke-width: 4;
+    filter: drop-shadow(0 0 8px #ffaa44);
+}
+
+.region-label {
+    fill: #f5e6c4;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'Georgia', serif;
+    text-shadow: 1px 1px 2px black;
+    pointer-events: none;
+}
+
+.tradition-label {
+    fill: #c4b58a;
+    font-size: 9px;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    pointer-events: none;
+}
+
+.crime-scene-marker {
+    fill: #aa5533;
+    stroke: #ffaa77;
+    stroke-width: 2;
+    filter: drop-shadow(0 0 4px #ff6633);
+}
+
+.crime-pulse {
+    fill: none;
+    stroke: #aa5533;
+    stroke-width: 2;
+    opacity: 0.6;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { r: 14; opacity: 0.6; }
+    100% { r: 28; opacity: 0; }
+}
+
+.crime-label {
+    fill: #ffcc99;
+    font-size: 8px;
+    font-weight: bold;
+    pointer-events: none;
+    text-shadow: 1px 1px 0 black;
+}
+
+.compass {
+    fill: #9b7b4c;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.suspects-status {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+    margin: 1rem 0;
+}
+
+.status-card {
+    background: #14120e;
+    border: 1px solid #4a3a28;
+    border-radius: 16px;
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.status-card:hover {
+    transform: translateY(-3px);
+    border-color: #d4bc7a;
+    background: #1e1912;
+}
+
+.status-card.solved {
+    border-color: #d4bc7a;
+    background: #2a241c;
+    box-shadow: 0 0 12px rgba(212, 188, 122, 0.3);
+}
+
+.status-icon {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.status-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #d4bc7a;
+}
+
+.status-region {
+    font-size: 0.8rem;
+    color: #9b7b4c;
+    margin: 0.2rem 0;
+}
+
+.status-evidence {
+    font-size: 0.75rem;
+    color: #b8aa8a;
+    margin-top: 0.5rem;
+}
+
+.portrait-container {
+    background: #0f0d0a;
+    border: 1px solid #4a3a28;
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.portrait-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.portrait-piece {
+    background: #2a241c;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    border: 2px solid #9b7b4c;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 0.3s ease;
+}
+
+.portrait-flower-name {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: #d4bc7a;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.final-accusation {
+    background: #14120e;
+    border: 1px solid #4a3a28;
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+}
+
+.accusation-panel {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#accuseSelect {
+    background: #2a241c;
+    border: 1px solid #9b7b4c;
+    padding: 10px 16px;
+    color: #ece8df;
+    font-family: 'Georgia', serif;
+    border-radius: 8px;
+    flex: 1;
+    min-width: 200px;
+    cursor: pointer;
+}
+
+#accuseSelect:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#accuseBtn, .reset-btn {
+    background: #4a3a28;
+    border: none;
+    padding: 10px 24px;
+    color: #ece8df;
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+#accuseBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#accuseBtn:not(:disabled):hover, .reset-btn:hover {
+    background: #9b7b4c;
+    color: #0a0c12;
+}
+
+.accusation-result {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-left: 4px solid #9b7b4c;
+    background: #1e1912;
+    border-radius: 8px;
+    line-height: 1.5;
+}
+
+.correct-answer {
+    color: #8bc48a;
+}
+
+.wrong-answer {
+    color: #c48a6a;
+}
+
+.reset-section {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.region-page {
+    min-height: 100vh;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    color: #d4bc7a;
+    text-decoration: none;
+    border-bottom: 1px solid #9b7b4c;
+    transition: all 0.2s;
+}
+
+.back-link:hover {
+    color: #ffdd99;
+    border-bottom-color: #ffdd99;
+}
+
+.region-header {
+    text-align: center;
+    margin-bottom: 1.8rem;
+}
+
+.region-header h1 {
+    font-size: 2rem;
+    color: #d4bc7a;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.suspect-card-detail {
+    background: #14120e;
+    border: 1px solid #4a3a28;
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.evidence-box {
+    background: #0f0d0a;
+    border-left: 4px solid #9b7b4c;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 0 12px 12px 0;
+}
+
+.riddle-area {
+    margin: 1rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.riddle-input {
+    background: #2a241c;
+    border: 1px solid #9b7b4c;
+    padding: 10px 14px;
+    color: #ece8df;
+    font-family: monospace;
+    flex: 1;
+    min-width: 180px;
+    border-radius: 8px;
+}
+
+.riddle-button {
+    background: #4a3a28;
+    border: none;
+    padding: 10px 20px;
+    color: #ece8df;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.riddle-button:hover:not(:disabled) {
+    background: #9b7b4c;
+    color: #0a0c12;
+}
+
+.riddle-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.hidden-evidence {
+    display: none;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #1e2a1e;
+    border-radius: 12px;
+    color: #d4bc7a;
+    border: 1px solid #9b7b4c;
+}
+
+.info-note {
+    background: #1e1912;
+    padding: 0.8rem;
+    border-radius: 12px;
+    font-style: italic;
+    color: #b8aa8a;
+}
+
+@media (max-width: 768px) {
+    .container { padding: 1rem; }
+    .header h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.3rem; }
+    .region-label { font-size: 10px; }
+    .tradition-label { font-size: 7px; }
+}
+
+.image-map-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.clickable-map {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 16px;
+}
+
+.map-markers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.map-marker {
+    position: absolute;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translate(-50%, -50%);
+    transition: transform 0.2s ease;
+}
+
+.map-marker:hover {
+    transform: translate(-50%, -50%) scale(1.15);
+}
+
+.marker-pin {
+    width: 24px;
+    height: 24px;
+    background: #c1440e;
+    border: 2px solid #f5e6c4;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.marker-pin.crime {
+    background: #8b0000;
+    animation: pulse-red 1.5s infinite;
+}
+
+@keyframes pulse-red {
+    0% {
+        box-shadow: 0 0 0 0 rgba(139, 0, 0, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(139, 0, 0, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(139, 0, 0, 0);
+    }
+}
+
+.map-marker:hover .marker-pin {
+    background: #ff6633;
+    width: 28px;
+    height: 28px;
+}
+
+.marker-label {
+    font-size: 10px;
+    font-weight: bold;
+    color: #f5e6c4;
+    text-shadow: 1px 1px 0 #000;
+    background: rgba(0,0,0,0.6);
+    padding: 2px 6px;
+    border-radius: 12px;
+    margin-top: 4px;
+    white-space: nowrap;
+    font-family: 'Georgia', serif;
+    letter-spacing: 0.5px;
+}
+
+.map-marker[data-region="scotland"] .marker-pin { background: #4a5a6a; }
+.map-marker[data-region="northernireland"] .marker-pin { background: #3a5a5a; }
+.map-marker[data-region="wales"] .marker-pin { background: #6a4a3a; }
+.map-marker[data-region="england"] .marker-pin { background: #4d6a3a; }
+
+.map-marker[data-region="scotland"].solved .marker-pin { background: #ffaa44; box-shadow: 0 0 12px #ffaa44; }
+.map-marker[data-region="northernireland"].solved .marker-pin { background: #ffaa44; box-shadow: 0 0 12px #ffaa44; }
+.map-marker[data-region="wales"].solved .marker-pin { background: #ffaa44; box-shadow: 0 0 12px #ffaa44; }
+.map-marker[data-region="england"].solved .marker-pin { background: #ffaa44; box-shadow: 0 0 12px #ffaa44; }
+
+@media (max-width: 768px) {
+    .marker-pin {
+        width: 18px;
+        height: 18px;
+    }
+    .marker-label {
+        font-size: 8px;
+        padding: 1px 4px;
+        white-space: nowrap;
+    }
+    .map-marker:hover .marker-pin {
+        width: 22px;
+        height: 22px;
+    }
+}

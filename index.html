@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>The Finch Mystery | A British Whodunnit</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .case-intro p, .case-intro li, .suspect-card-detail p, .info-note, .evidence-box, .riddle-area, .accusation-result {
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+        
+        .case-badge {
+            font-size: 1rem;
+            padding: 0.4rem 1.2rem;
+        }
+        
+        .status-name {
+            font-size: 1.2rem;
+        }
+        
+        .status-evidence, .status-region {
+            font-size: 0.9rem;
+        }
+        
+        .marker-label {
+            font-size: 12px;
+            padding: 3px 8px;
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+        }
+        
+        .map-instruction {
+            font-size: 1rem;
+        }
+        
+        .portrait-flower-name {
+            font-size: 1.3rem;
+        }
+        
+        .accusation-panel select, .accusation-panel button, .reset-btn {
+            font-size: 1rem;
+            padding: 12px 20px;
+        }
+        
+        .victim-intro-row {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        
+        .victim-photo {
+            flex-shrink: 0;
+            width: 180px;
+            text-align: center;
+        }
+        
+        .victim-photo img {
+            width: 100%;
+            border-radius: 20px;
+            border: 3px solid #d4bc7a;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            background: #2a241c;
+            display: block;
+        }
+        
+        .victim-photo .caption {
+            display: none;
+        }
+        
+        .case-content {
+            flex: 1;
+        }
+        
+        @media (max-width: 700px) {
+            .victim-photo {
+                width: 140px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .victim-photo {
+                width: 120px;
+            }
+            body {
+                font-size: 16px;
+            }
+            .header h1 {
+                font-size: 1.9rem;
+            }
+        }
+        
+        .riddle-input {
+            font-size: 1rem;
+            padding: 12px 16px;
+        }
+        
+        .riddle-button {
+            font-size: 1rem;
+            padding: 12px 24px;
+        }
+        
+        .progress-tracker span {
+            font-size: 1rem;
+        }
+        
+        .status-card {
+            padding: 1.2rem;
+        }
+        
+        .suspects-status {
+            gap: 1.5rem;
+        }
+        
+        .final-accusation p {
+            font-size: 1rem;
+        }
+
+        .final-accusation {
+            background: linear-gradient(145deg, #14120e 0%, #0f0d0a 100%);
+            border: 1px solid #6a4e2e;
+            border-radius: 32px;
+            padding: 2rem 1.8rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(212,188,122,0.2);
+        }
+
+        .final-accusation::before {
+            content: "⚖️";
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            font-size: 120px;
+            opacity: 0.05;
+            pointer-events: none;
+            font-family: monospace;
+        }
+
+        .final-accusation::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 30% 40%, rgba(212,188,122,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .accusation-header {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.2rem;
+        }
+
+        .accusation-header h2 {
+            margin: 0;
+            border-left: none;
+            padding-left: 0;
+            background: linear-gradient(135deg, #e6d5a8 0%, #d4bc7a 80%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            letter-spacing: 1px;
+        }
+
+        .accusation-badge {
+            background: #2a241c;
+            border-radius: 60px;
+            padding: 0.25rem 1rem;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: #d4bc7a;
+            border: 1px solid #9b7b4c;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .accusation-desc {
+            color: #b8aa8a;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            border-left: 2px solid #9b7b4c;
+            padding-left: 1rem;
+        }
+
+        #allCluesMessage {
+            background: linear-gradient(95deg, #2a4a2a 0%, #1e3a1e 100%);
+            padding: 0.9rem 1.2rem;
+            border-radius: 60px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.95rem;
+            color: #d4e6b0;
+            border: 1px solid #7a9e5a;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            backdrop-filter: blur(2px);
+            letter-spacing: 0.3px;
+        }
+
+        .accusation-panel {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+            background: rgba(0,0,0,0.3);
+            padding: 0.75rem 1rem;
+            border-radius: 80px;
+            backdrop-filter: blur(4px);
+        }
+
+        .accusation-panel select {
+            background: #1e1912;
+            border: 1px solid #9b7b4c;
+            padding: 12px 20px;
+            color: #f2e8d5;
+            font-family: 'Georgia', serif;
+            border-radius: 48px;
+            flex: 2;
+            min-width: 200px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+            letter-spacing: 0.3px;
+        }
+
+        .accusation-panel select:not(:disabled):hover {
+            background: #2a241c;
+            border-color: #d4bc7a;
+            box-shadow: 0 0 8px rgba(212,188,122,0.4);
+        }
+
+        .accusation-panel select:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            filter: grayscale(0.1);
+        }
+
+        #accuseBtn {
+            background: linear-gradient(145deg, #5a3e28, #3a2a1c);
+            border: none;
+            padding: 12px 28px;
+            color: #f2e8d5;
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 48px;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #accuseBtn:not(:disabled):hover {
+            background: linear-gradient(145deg, #7a5a3a, #5a3e28);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 18px -6px rgba(0,0,0,0.5);
+            color: #ffefcf;
+            border: 1px solid #d4bc7a;
+        }
+
+        #accuseBtn:active:not(:disabled) {
+            transform: translateY(1px);
+        }
+
+        #accuseBtn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            filter: grayscale(0.2);
+        }
+
+        .accusation-result {
+            margin-top: 1.5rem;
+            padding: 1.2rem 1.5rem;
+            border-radius: 28px;
+            background: rgba(0,0,0,0.45);
+            backdrop-filter: blur(6px);
+            border-left: 6px solid #d4bc7a;
+            font-size: 1rem;
+            line-height: 1.5;
+            transition: all 0.2s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .correct-answer {
+            background: linear-gradient(115deg, #1e3a1e20, #0f2a0f40);
+            border-left-color: #8bc48a;
+            color: #e2f0cf;
+        }
+
+        .wrong-answer {
+            background: linear-gradient(115deg, #4a2a2a20, #2a1a1a40);
+            border-left-color: #c48a6a;
+            color: #f0cfcf;
+        }
+
+        .correct-answer strong, .wrong-answer strong {
+            color: #ffdd99;
+            font-weight: bold;
+            letter-spacing: 0.3px;
+        }
+
+        .verdict-icon {
+            font-size: 1.8rem;
+            vertical-align: middle;
+            margin-right: 10px;
+            display: inline-block;
+        }
+
+        @media (max-width: 640px) {
+            .final-accusation {
+                padding: 1.5rem;
+            }
+            .accusation-panel {
+                border-radius: 40px;
+                padding: 0.5rem;
+            }
+            .accusation-panel select, #accuseBtn {
+                padding: 10px 16px;
+            }
+        }
+
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 0 0 rgba(212,188,122,0.3); }
+            70% { box-shadow: 0 0 0 8px rgba(212,188,122,0); }
+            100% { box-shadow: 0 0 0 0 rgba(212,188,122,0); }
+        }
+
+        .accusation-panel select:enabled, #accuseBtn:enabled {
+            animation: glowPulse 1.8s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-dark"></div>
+    <div class="overlay-mist"></div>
+
+    <div class="container">
+        <header class="header">
+            <h1>THE FINCH MYSTERY</h1>
+            <p>Who murdered Mr. Finch? A detective's tale of broken traditions</p>
+            <div class="header-decoration"></div>
+        </header>
+
+        <section class="case-intro">
+            <div class="victim-intro-row">
+                <div class="victim-photo">
+                    <img src="жертва.png" alt="Mr. Finch - the victim">
+                </div>
+                <div class="case-content">
+                    <div class="case-badge">CASE FILE No. 1888</div>
+                    <p>Mr. Finch, a wealthy Australian tourist, was found lifeless in one of London hotels. The Scotland Yard suspects four distinguished gentlemen, each from a different corner of the United Kingdom. Sir Finch disrespected ancient traditions of each region, and one of them decided to take justice into his own hands.</p>
+                    <p>Your task is to interrogate the suspects, solve their riddles, and collect evidence. As each clue is revealed, a piece of the hidden portrait will be unveiled. Only when all four clues are gathered, you may name the killer.</p>
+                </div>
+            </div>
+            <div class="progress-tracker">
+                <span>Clues collected: <span id="evidenceCounter">0</span> of 4</span>
+                <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+            </div>
+        </section>
+
+        <section class="map-section">
+            <h2>Map of Investigation</h2>
+            <p class="map-instruction">Click on any marker to interrogate the suspect</p>
+            <div class="interactive-map">
+                <div class="map-container">
+                    <div class="image-map-wrapper" style="max-width: 800px; margin: 0 auto;">
+                        <img src="map.jpg" alt="Map of British Isles" class="clickable-map" id="investigationMap" style="width: 100%; height: auto; display: block;">
+                        <div class="map-markers">
+                            <div class="map-marker" data-region="scotland" style="top: 41%; left: 55%;">
+                                <div class="marker-pin"></div>
+                                <span class="marker-label">Scotland</span>
+                            </div>
+                            <div class="map-marker" data-region="northernireland" style="top: 54%; left: 30%;">
+                                <div class="marker-pin"></div>
+                                <span class="marker-label">N. Ireland</span>
+                            </div>
+                            <div class="map-marker" data-region="wales" style="top: 76%; left: 54%;">
+                                <div class="marker-pin"></div>
+                                <span class="marker-label">Wales</span>
+                            </div>
+                            <div class="map-marker" data-region="england" style="top: 75%; left: 65%;">
+                                <div class="marker-pin"></div>
+                                <span class="marker-label">England</span>
+                            </div>
+                            <div class="map-marker crime-marker" data-region="crime" style="top: 62%; left: 63%;">
+                                <div class="marker-pin crime"></div>
+                                <span class="marker-label">CRIME SCENE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="suspects-progress">
+            <h2>Suspects</h2>
+            <div class="suspects-status" id="suspectsStatus">
+                <div class="status-card" data-region="england">
+                    <div class="status-icon">[?]</div>
+                    <div class="status-name">Mr. John (England)</div>
+                    <div class="status-region">England</div>
+                    <div class="status-evidence">No clue found</div>
+                </div>
+                <div class="status-card" data-region="scotland">
+                    <div class="status-icon">[?]</div>
+                    <div class="status-name">Sir Augustus (Scotland)</div>
+                    <div class="status-region">Scotland</div>
+                    <div class="status-evidence">No clue found</div>
+                </div>
+                <div class="status-card" data-region="wales">
+                    <div class="status-icon">[?]</div>
+                    <div class="status-name">Mr. Dylan (Wales)</div>
+                    <div class="status-region">Wales</div>
+                    <div class="status-evidence">No clue found</div>
+                </div>
+                <div class="status-card" data-region="northernireland">
+                    <div class="status-icon">[?]</div>
+                    <div class="status-name">Mr. Cormac (N. Ireland)</div>
+                    <div class="status-region">Northern Ireland</div>
+                    <div class="status-evidence">No clue found</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="portrait-section">
+            <h2>Hidden Portrait</h2>
+            <p class="map-instruction">Each solved riddle reveals a piece of the killer's emblem</p>
+            <div class="portrait-container">
+                <div class="portrait-grid" id="portraitGrid">
+                    <div class="portrait-piece" data-piece="0"></div>
+                    <div class="portrait-piece" data-piece="1"></div>
+                    <div class="portrait-piece" data-piece="2"></div>
+                    <div class="portrait-piece" data-piece="3"></div>
+                </div>
+                <div class="portrait-flower-name" id="flowerName"></div>
+            </div>
+        </section>
+
+        <section class="final-accusation">
+            <div class="accusation-header">
+                <h2>The Final Reckoning</h2>
+                <div class="accusation-badge">Scotland Yard</div>
+            </div>
+            <div class="accusation-desc">
+                <span>«Truth is rarely pure and never simple.» Only the detective who has gathered every clue may pronounce the verdict.</span>
+            </div>
+            <div id="allCluesMessage" style="display: none;">
+                ALL CLUES COLLECTED! The shadow of guilt lifts — choose your suspect and deliver justice.
+            </div>
+            <div class="accusation-panel">
+                <select id="accuseSelect" disabled>
+                    <option value="">— Accuse a gentleman —</option>
+                    <option value="england">Mr. John (England)</option>
+                    <option value="scotland">Sir Augustus (Scotland)</option>
+                    <option value="wales">Mr. Dylan (Wales)</option>
+                    <option value="northernireland">Mr. Cormac (N. Ireland)</option>
+                </select>
+                <button id="accuseBtn" disabled>ACCUSE</button>
+            </div>
+            <div id="accusationResult" class="accusation-result"></div>
+        </section>
+
+        <section class="reset-section">
+            <button onclick="resetProgress()" class="reset-btn">Start over</button>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scotland - Interrogation</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .suspect-layout {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        .suspect-image {
+            flex: 0 0 320px;
+            text-align: center;
+        }
+        .suspect-image img {
+            width: 100%;
+            max-width: 320px;
+            border-radius: 20px;
+            border: 4px solid #d4bc7a;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            background: #2a241c;
+        }
+        .suspect-details {
+            flex: 3;
+            min-width: 320px;
+        }
+        .suspect-card-detail {
+            margin-bottom: 0;
+        }
+        .suspect-card-detail h3 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+        .suspect-title {
+            font-size: 1.3rem;
+            margin-bottom: 1.2rem;
+            color: #d4bc7a;
+        }
+        .riddle-area p, .evidence-box p, .info-note p {
+            font-size: 1.3rem;
+            line-height: 1.5;
+        }
+        .evidence-box {
+            margin-bottom: 1.5rem;
+        }
+        .riddle-input, .riddle-button {
+            font-size: 1.2rem;
+            padding: 0.6rem 1rem;
+        }
+        .riddle-input {
+            width: 280px;
+        }
+        .hint-button {
+            background: #3a2a1a;
+            border: 1px solid #9b7b4c;
+            padding: 10px 20px;
+            color: #d4bc7a;
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 10px;
+            margin-top: 1rem;
+            transition: all 0.2s;
+        }
+        .hint-button:hover {
+            background: #9b7b4c;
+            color: #0a0c12;
+        }
+        .hint-text {
+            display: none;
+            margin-top: 0.8rem;
+            padding: 1rem;
+            background: #1e1912;
+            border-left: 4px solid #d4bc7a;
+            border-radius: 10px;
+            font-style: italic;
+            color: #b8aa8a;
+            font-size: 1.1rem;
+        }
+        .hint-text.visible {
+            display: block;
+        }
+        .riddle-area {
+            margin-top: 1rem;
+        }
+        .footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #8a7a62;
+        }
+        .hint-section {
+            margin-top: 1.5rem;
+            border-top: 1px solid #3a2e24;
+            padding-top: 1rem;
+        }
+        @media (max-width: 700px) {
+            .suspect-layout {
+                flex-direction: column;
+                align-items: center;
+            }
+            .suspect-image {
+                flex: 0 0 auto;
+            }
+        }
+    </style>
+</head>
+<body class="region-page">
+    <div class="bg-dark"></div>
+    <div class="overlay-mist"></div>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to map</a>
+        <div class="region-header">
+            <h1>Scotland</h1>
+            <div class="region-tradition">Tradition: Poet Night</div>
+        </div>
+        
+        <div class="suspect-layout">
+            <div class="suspect-image">
+                <img src="../шотландия_подозреваемый.png" alt="Sir Augustus">
+            </div>
+            <div class="suspect-details">
+                <div class="suspect-card-detail">
+                    <h3 id="suspectName">Loading...</h3>
+                    <div class="suspect-title" id="suspectTitle"></div>
+                    <div class="evidence-box">
+                        <p><strong>Motive:</strong> <span id="suspectMotive"></span></p>
+                        <p><strong>Tradition:</strong> <span id="traditionDesc"></span></p>
+                    </div>
+                    <div class="riddle-area">
+                        <p><strong>Riddle:</strong> <span id="riddleText"></span></p>
+                        <div style="display: flex; gap: 0.8rem; flex-wrap: wrap; align-items: center;">
+                            <input type="text" id="riddleInput" class="riddle-input" placeholder="Enter answer...">
+                            <button id="unlockBtn" class="riddle-button">Reveal clue</button>
+                        </div>
+                        <div id="hiddenEvidence" class="hidden-evidence"></div>
+                        <div id="clueMessage" class="clue-message"></div>
+                    </div>
+                    <div class="hint-section">
+                        <button id="hintBtn" class="hint-button">Show hint</button>
+                        <div id="hintText" class="hint-text">He wrote "Auld Lang Syne" and "To a Mouse". Scotland's national poet.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <p>© Interrogation Room</p>
+        </footer>
+    </div>
+    <script src="../script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadRegionPage('scotland');
+            const hintBtn = document.getElementById('hintBtn');
+            const hintText = document.getElementById('hintText');
+            if (hintBtn && hintText) {
+                hintBtn.addEventListener('click', () => {
+                    hintText.classList.toggle('visible');
+                    hintBtn.textContent = hintText.classList.contains('visible') ? 'Hide hint' : 'Show hint';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
