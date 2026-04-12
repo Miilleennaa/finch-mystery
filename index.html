@@ -85,21 +85,141 @@
             flex: 1;
         }
         
-        @media (max-width: 700px) {
-            .victim-photo {
-                width: 140px;
+        @media (max-width: 768px) {
+            .case-intro {
+                padding: 1rem;
+            }
+            
+            .case-badge {
+                font-size: 0.75rem;
+                padding: 0.25rem 0.9rem;
+                display: inline-block;
+                margin-bottom: 0.8rem;
+            }
+            
+            .case-intro p {
+                font-size: 0.95rem;
+                line-height: 1.45;
+                margin-bottom: 0.7rem;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            .case-content {
+                width: 100%;
+            }
+            
+            .case-intro .case-content p:first-of-type {
+                margin-top: 0;
             }
         }
         
         @media (max-width: 600px) {
             .victim-photo {
-                width: 120px;
+                width: 100px;
             }
+            
             body {
                 font-size: 16px;
             }
+            
             .header h1 {
-                font-size: 1.9rem;
+                font-size: 1.6rem;
+                letter-spacing: 2px;
+            }
+            
+            .header p {
+                font-size: 0.85rem;
+            }
+            
+            h2 {
+                font-size: 1.35rem;
+            }
+            
+            .case-badge {
+                font-size: 0.7rem;
+                padding: 0.2rem 0.8rem;
+            }
+            
+            .case-intro p {
+                font-size: 0.88rem;
+                line-height: 1.4;
+            }
+            
+            .progress-tracker span {
+                font-size: 0.85rem;
+            }
+            
+            .map-instruction {
+                font-size: 0.8rem;
+            }
+            
+            .status-name {
+                font-size: 0.95rem;
+            }
+            
+            .status-evidence, .status-region {
+                font-size: 0.7rem;
+            }
+            
+            .portrait-flower-name {
+                font-size: 0.9rem;
+            }
+            
+            .accusation-panel select, .accusation-panel button, .reset-btn {
+                font-size: 0.85rem;
+                padding: 8px 14px;
+            }
+            
+            .marker-label {
+                font-size: 8px;
+                padding: 2px 4px;
+                white-space: nowrap;
+            }
+            
+            .marker-pin {
+                width: 16px;
+                height: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.8rem;
+            }
+            
+            .case-intro {
+                padding: 0.8rem;
+            }
+            
+            .case-badge {
+                font-size: 0.65rem;
+                padding: 0.2rem 0.7rem;
+            }
+            
+            .case-intro p {
+                font-size: 0.82rem;
+                line-height: 1.4;
+            }
+            
+            .victim-intro-row {
+                gap: 0.8rem;
+            }
+            
+            .victim-photo {
+                width: 80px;
+            }
+            
+            .header h1 {
+                font-size: 1.4rem;
+            }
+            
+            .status-card {
+                padding: 0.8rem;
+            }
+            
+            .status-icon {
+                font-size: 1.2rem;
             }
         }
         
@@ -351,6 +471,55 @@
 
         .accusation-panel select:enabled, #accuseBtn:enabled {
             animation: glowPulse 1.8s infinite;
+        }
+        
+        @media (max-width: 768px) {
+            .marker-pin {
+                width: 18px;
+                height: 18px;
+            }
+            .marker-label {
+                font-size: 8px;
+                padding: 2px 4px;
+                white-space: nowrap;
+            }
+            .map-marker:hover .marker-pin {
+                width: 22px;
+                height: 22px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .marker-pin {
+                width: 14px;
+                height: 14px;
+            }
+            .marker-label {
+                font-size: 7px;
+                padding: 1px 3px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .case-intro p {
+                word-break: break-word;
+                hyphens: auto;
+            }
+            
+            .case-badge {
+                word-break: keep-all;
+                white-space: normal;
+                text-align: center;
+            }
+            
+            .victim-intro-row {
+                flex-direction: row;
+                align-items: center;
+            }
+            
+            .victim-photo {
+                margin-bottom: 0;
+            }
         }
     </style>
 </head>
