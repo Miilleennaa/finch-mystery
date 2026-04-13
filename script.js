@@ -47,7 +47,7 @@ const suspects = {
         motive: 'Mr. Finch wore black on St. Patrick\'s Day, causing great indignation among the Irish.',
         evidenceRiddle: 'What colour should the Irish wear on St. Patrick\'s Day?',
         riddleAnswer: 'green',
-        secret: 'A fresh shamrock was found lying on the sofa. Mr. Cormac left his national symbol at the crime scene.',
+        secret: 'Hotel guests saw Mr. Cormack washing his jacket to remove some stains.',
         alibi: 'He was at a parade, but disappeared during the final hour.',
         flower: 'Shamrock'
     }
