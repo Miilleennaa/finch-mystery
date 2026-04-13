@@ -8,7 +8,7 @@ const suspects = {
         motive: 'Mr. Finch mocked this tradition and used this food for his breakfast, which caused great indignation.',
         evidenceRiddle: 'What product is used during this competition?',
         riddleAnswer: 'cheese',
-        secret: 'Clue: A half-eaten wheel of Double Gloucester cheese was found near the crime scene. Mr. John admitted he brought it, but claimed it was for a celebration.',
+        secret: 'A half-eaten wheel of Double Gloucester cheese was found near the crime scene. Mr. John admitted he brought it, but claimed it was for a celebration.',
         alibi: 'He was at a pub in Gloucester, but witnesses saw him leave for an hour.',
         flower: 'Tudor Rose'
     },
@@ -21,7 +21,7 @@ const suspects = {
         motive: 'Sir Finch mixed up lines of a poem of this poet "To a Mouse".',
         evidenceRiddle: 'What is the name of this Scottish poet?',
         riddleAnswer: 'Robert Burns',
-        secret: 'Clue: A crumpled page with misquoted Burns verses was found in Mr. Finch\'s pocket. Sir Augustus was seen arguing about poetry that night.',
+        secret: 'A crumpled page with misquoted Burns verses was found in Mr. Finch\'s pocket. Sir Augustus was seen arguing about poetry that night.',
         alibi: 'He recited poems at a Burns supper but slipped out during the toast.',
         flower: 'Thistle'
     },
@@ -34,7 +34,7 @@ const suspects = {
         motive: 'Mr. Finch used this object as an ordinary eating utensil, deeply offending Mr. Dylan.',
         evidenceRiddle: 'What do men in Wales give to their beloved girls?',
         riddleAnswer: 'spoon',
-        secret: 'Clue: A beautifully carved love spoon with a cracked handle was discovered in the rubbish. Mr. Dylan admits he made it but says it was defiled.',
+        secret: 'A beautifully carved love spoon with a cracked handle was discovered in the rubbish. Mr. Dylan admits he made it but says it was defiled.',
         alibi: 'He attended a Eisteddfod poetry festival, but took a long walk alone.',
         flower: 'Daffodil'
     },
@@ -47,7 +47,7 @@ const suspects = {
         motive: 'Mr. Finch wore black on St. Patrick\'s Day, causing great indignation among the Irish.',
         evidenceRiddle: 'What colour should the Irish wear on St. Patrick\'s Day?',
         riddleAnswer: 'green',
-        secret: 'Clue: A black jacket with green paint smudges. Mr. Cormac confessed he tried to "correct" Sir Finch\'s disrespect.',
+        secret: 'A fresh shamrock was found lying on the sofa. Mr. Cormac left his national symbol at the crime scene.',
         alibi: 'He was at a parade, but disappeared during the final hour.',
         flower: 'Shamrock'
     }
