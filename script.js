@@ -183,6 +183,12 @@ function setupMapMarkers() {
                 e.stopPropagation();
                 window.location.href = `pages/${region}.html`;
             });
+        } else if (region === 'crime') {
+            marker.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const modal = document.getElementById('crimeModal');
+                if (modal) modal.style.display = 'flex';
+            });
         }
     });
 }
@@ -241,6 +247,17 @@ function loadMainPage() {
     setupMapMarkers();
     setupStatusClicks();
     setupAccusation();
+    
+    const modal = document.getElementById('crimeModal');
+    const closeBtn = document.querySelector('.modal-close');
+    if (modal && closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) modal.style.display = 'none';
+        });
+    }
 }
 
 function loadRegionPage(regionId) {
