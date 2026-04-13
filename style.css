@@ -11,6 +11,7 @@ body {
     overflow-x: hidden;
     min-height: 100vh;
     font-size: 20px;
+    position: relative;
 }
 
 ::-webkit-scrollbar {
@@ -30,7 +31,37 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #1a2a1f 0%, #0a0f0a 50%, #0a0c12 100%);
+    background: linear-gradient(135deg, #2a2418 0%, #1a1610 30%, #0f0c08 70%, #0a0805 100%);
+    z-index: -3;
+}
+
+.bg-dark::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        repeating-linear-gradient(45deg, rgba(180, 140, 80, 0.03) 0px, rgba(180, 140, 80, 0.03) 2px, transparent 2px, transparent 8px),
+        repeating-linear-gradient(135deg, rgba(140, 100, 50, 0.02) 0px, rgba(140, 100, 50, 0.02) 1px, transparent 1px, transparent 6px);
+    pointer-events: none;
+    z-index: -2;
+}
+
+.bg-dark::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(ellipse at 20% 30%, rgba(200, 160, 100, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 70%, rgba(180, 130, 70, 0.06) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 10%, rgba(210, 170, 110, 0.05) 0%, transparent 60%),
+        radial-gradient(ellipse at 90% 95%, rgba(160, 120, 70, 0.07) 0%, transparent 50%);
+    pointer-events: none;
     z-index: -2;
 }
 
@@ -40,9 +71,48 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 30% 40%, rgba(180, 140, 72, 0.05) 0%, transparent 70%);
+    background: radial-gradient(circle at 30% 50%, rgba(212, 188, 122, 0.04) 0%, transparent 60%);
     pointer-events: none;
     z-index: -1;
+}
+
+.overlay-mist::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.4) 100%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.container::before {
+    content: "";
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 100px;
+    height: 100px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="none" stroke="%23d4bc7a" stroke-width="1.2" opacity="0.25" d="M15,15 L35,15 M15,15 L15,35 M85,15 L65,15 M85,15 L85,35 M15,85 L35,85 M15,85 L15,65 M85,85 L65,85 M85,85 L85,65"/><circle cx="15" cy="15" r="4" fill="%23d4bc7a" opacity="0.2"/><circle cx="85" cy="15" r="4" fill="%23d4bc7a" opacity="0.2"/><circle cx="15" cy="85" r="4" fill="%23d4bc7a" opacity="0.2"/><circle cx="85" cy="85" r="4" fill="%23d4bc7a" opacity="0.2"/></svg>');
+    background-size: contain;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.container::after {
+    content: "";
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 100px;
+    height: 100px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="none" stroke="%23d4bc7a" stroke-width="1.2" opacity="0.25" d="M15,15 L35,15 M15,15 L15,35 M85,15 L65,15 M85,15 L85,35 M15,85 L35,85 M15,85 L15,65 M85,85 L65,85 M85,85 L85,65"/><circle cx="15" cy="15" r="4" fill="%23d4bc7a" opacity="0.2"/><circle cx="85" cy="15" r="4" fill="%23d4bc7a" opacity="0.2"/><circle cx="15" cy="85" r="4" fill="%23d4bc7a" opacity="0.2"/><circle cx="85" cy="85" r="4" fill="%23d4bc7a" opacity="0.2"/></svg>');
+    background-size: contain;
+    pointer-events: none;
+    z-index: 0;
+    transform: rotate(180deg);
 }
 
 .container {
@@ -58,6 +128,20 @@ body {
     border-bottom: 2px solid #9b7b4c;
     margin-bottom: 2rem;
     padding-bottom: 1.2rem;
+    position: relative;
+}
+.header::before {
+    content: "";
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 20px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><path fill="%239b7b4c" d="M50,0 L60,10 L50,20 L40,10 Z"/><rect x="45" y="8" width="10" height="4" fill="%239b7b4c"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.6;
 }
 
 .header h1 {
@@ -82,7 +166,7 @@ body {
 }
 
 .case-intro {
-    background: rgba(20, 18, 14, 0.7);
+    background: rgba(20, 18, 14, 0.75);
     border: 1px solid #4a3a28;
     border-radius: 20px;
     padding: 1.5rem;
@@ -153,100 +237,30 @@ h2 {
 }
 
 .interactive-map {
-    background: #0f0d0a;
+    background: #1a1612;
     border-radius: 24px;
     padding: 1rem;
-    border: 1px solid #4a3a28;
+    border: 1px solid #6a4e2e;
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.3), 0 8px 20px rgba(0,0,0,0.4);
 }
 
 .map-container {
     display: flex;
     justify-content: center;
-    background: #1a382a;
+    background: transparent;
     border-radius: 16px;
     overflow: hidden;
+    border: none;
+    box-shadow: none;
 }
 
-.uk-map {
+.clickable-map {
     width: 100%;
     height: auto;
-    cursor: pointer;
-}
-
-.map-region {
-    stroke: #d4bc7a;
-    stroke-width: 2.5;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.3));
-}
-
-.map-region:hover {
-    stroke: #ffd966;
-    stroke-width: 3.5;
-    filter: drop-shadow(0 0 8px rgba(212, 188, 122, 0.5));
-}
-
-.map-region.england { fill: #4d6a3a; }
-.map-region.scotland { fill: #4a5a6a; }
-.map-region.wales { fill: #6a4a3a; }
-.map-region.northernireland { fill: #3a5a5a; }
-
-.map-region.solved {
-    stroke: #ffaa44;
-    stroke-width: 4;
-    filter: drop-shadow(0 0 8px #ffaa44);
-}
-
-.region-label {
-    fill: #f5e6c4;
-    font-size: 14px;
-    font-weight: bold;
-    font-family: 'Georgia', serif;
-    text-shadow: 1px 1px 2px black;
-    pointer-events: none;
-}
-
-.tradition-label {
-    fill: #c4b58a;
-    font-size: 9px;
-    font-family: 'Georgia', serif;
-    font-style: italic;
-    pointer-events: none;
-}
-
-.crime-scene-marker {
-    fill: #aa5533;
-    stroke: #ffaa77;
-    stroke-width: 2;
-    filter: drop-shadow(0 0 4px #ff6633);
-}
-
-.crime-pulse {
-    fill: none;
-    stroke: #aa5533;
-    stroke-width: 2;
-    opacity: 0.6;
-    animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-    0% { r: 14; opacity: 0.6; }
-    100% { r: 28; opacity: 0; }
-}
-
-.crime-label {
-    fill: #ffcc99;
-    font-size: 8px;
-    font-weight: bold;
-    pointer-events: none;
-    text-shadow: 1px 1px 0 black;
-}
-
-.compass {
-    fill: #9b7b4c;
-    font-size: 24px;
-    font-weight: bold;
+    display: block;
+    border-radius: 12px;
+    background: #d4bca0;  
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 .suspects-status {
@@ -257,13 +271,14 @@ h2 {
 }
 
 .status-card {
-    background: #14120e;
+    background: rgba(20, 18, 14, 0.85);
     border: 1px solid #4a3a28;
     border-radius: 16px;
     padding: 1rem;
     text-align: center;
     transition: all 0.2s;
     cursor: pointer;
+    backdrop-filter: blur(2px);
 }
 
 .status-card:hover {
@@ -303,12 +318,13 @@ h2 {
 }
 
 .portrait-container {
-    background: #0f0d0a;
+    background: rgba(15, 13, 10, 0.85);
     border: 1px solid #4a3a28;
     border-radius: 20px;
     padding: 1.5rem;
     margin: 1rem 0;
     text-align: center;
+    backdrop-filter: blur(2px);
 }
 
 .portrait-grid {
@@ -339,11 +355,12 @@ h2 {
 }
 
 .final-accusation {
-    background: #14120e;
+    background: rgba(20, 18, 14, 0.85);
     border: 1px solid #4a3a28;
     border-radius: 20px;
     padding: 1.5rem;
     margin: 2rem 0;
+    backdrop-filter: blur(2px);
 }
 
 .accusation-panel {
@@ -446,11 +463,12 @@ h2 {
 }
 
 .suspect-card-detail {
-    background: #14120e;
+    background: rgba(20, 18, 14, 0.85);
     border: 1px solid #4a3a28;
     border-radius: 20px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
+    backdrop-filter: blur(2px);
 }
 
 .evidence-box {
@@ -518,25 +536,10 @@ h2 {
     color: #b8aa8a;
 }
 
-@media (max-width: 768px) {
-    .container { padding: 1rem; }
-    .header h1 { font-size: 1.6rem; }
-    h2 { font-size: 1.3rem; }
-    .region-label { font-size: 10px; }
-    .tradition-label { font-size: 7px; }
-}
-
 .image-map-wrapper {
     position: relative;
     display: inline-block;
     width: 100%;
-}
-
-.clickable-map {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 16px;
 }
 
 .map-markers {
@@ -610,10 +613,10 @@ h2 {
     letter-spacing: 0.5px;
 }
 
-.map-marker[data-region="scotland"] .marker-pin { background: #4a5a6a; }
-.map-marker[data-region="northernireland"] .marker-pin { background: #3a5a5a; }
-.map-marker[data-region="wales"] .marker-pin { background: #6a4a3a; }
-.map-marker[data-region="england"] .marker-pin { background: #4d6a3a; }
+.map-marker[data-region="scotland"] .marker-pin { background: #4d8ba2; }
+.map-marker[data-region="northernireland"] .marker-pin { background: #608d60; }
+.map-marker[data-region="wales"] .marker-pin { background: #87603a; }
+.map-marker[data-region="england"] .marker-pin { background: #9b5757; }
 
 .map-marker[data-region="scotland"].solved .marker-pin { background: #ffaa44; box-shadow: 0 0 12px #ffaa44; }
 .map-marker[data-region="northernireland"].solved .marker-pin { background: #ffaa44; box-shadow: 0 0 12px #ffaa44; }
@@ -621,6 +624,9 @@ h2 {
 .map-marker[data-region="england"].solved .marker-pin { background: #ffaa44; box-shadow: 0 0 12px #ffaa44; }
 
 @media (max-width: 768px) {
+    .container { padding: 1rem; }
+    .header h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.3rem; }
     .marker-pin {
         width: 18px;
         height: 18px;
@@ -633,5 +639,65 @@ h2 {
     .map-marker:hover .marker-pin {
         width: 22px;
         height: 22px;
+    }
+    .container::before, .container::after { width: 60px; height: 60px; }
+}
+
+.crime-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.85);
+    backdrop-filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: #14120e;
+    margin: auto;
+    padding: 20px;
+    border: 2px solid #9b7b4c;
+    border-radius: 24px;
+    width: 90%;
+    max-width: 700px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    animation: fadeInUp 0.4s ease-out;
+}
+
+.modal-close {
+    color: #b8aa8a;
+    float: right;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 24px;
+    transition: color 0.2s;
+}
+.modal-close:hover {
+    color: #d4bc7a;
+}
+
+.modal-caption {
+    text-align: center;
+    margin-top: 16px;
+    color: #d4bc7a;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
